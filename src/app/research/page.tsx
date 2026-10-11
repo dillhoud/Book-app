@@ -45,8 +45,8 @@ export default async function ResearchPage({ searchParams }: { searchParams: Pro
     <div className="mx-auto max-w-7xl px-4 py-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight">Research &amp; compare</h1>
-          <p className="mt-1 text-slate-500">Owner ratings, known issues and real market prices for every model.</p>
+          <h1 className="font-display text-4xl font-bold uppercase italic tracking-tight text-white">Research &amp; compare</h1>
+          <p className="mt-1 text-zinc-500">Owner ratings, known issues and real market prices for every model.</p>
         </div>
         <Link href="/reviews" className="btn-ghost">Browse all owner reviews →</Link>
       </div>
@@ -97,21 +97,21 @@ export default async function ResearchPage({ searchParams }: { searchParams: Pro
           <Link key={m.slug} href={`/research/${m.slug}`} className="card group flex flex-col overflow-hidden transition hover:shadow-md">
             <VehicleArt category={m.category} className="h-36" />
             <div className="flex flex-1 flex-col p-4">
-              <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">{m.segment}</div>
-              <h2 className="text-lg font-bold group-hover:text-brand-600">{m.make} {m.model}</h2>
+              <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{m.segment}</div>
+              <h2 className="text-lg font-bold group-hover:text-brand-400">{m.make} {m.model}</h2>
               <div className="mt-1 flex items-center gap-2 text-sm">
                 <Stars value={s.avg} className="text-sm" />
                 <b>{s.avg.toFixed(1)}</b>
-                <span className="text-slate-500">· {s.count} reviews · {s.recommendPct}% recommend</span>
+                <span className="text-zinc-500">· {s.count} reviews · {s.recommendPct}% recommend</span>
               </div>
               <dl className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
-                <div className="rounded-lg bg-slate-50 p-2"><dt className="text-slate-500">Reliability</dt><dd className="text-base font-bold">{s.sub.reliability.toFixed(1)}</dd></div>
-                <div className="rounded-lg bg-slate-50 p-2"><dt className="text-slate-500">Value</dt><dd className="text-base font-bold">{s.sub.value.toFixed(1)}</dd></div>
-                <div className={`rounded-lg p-2 ${majors ? "bg-red-50" : "bg-slate-50"}`}><dt className="text-slate-500">Known issues</dt><dd className="text-base font-bold">{issueCount}{majors ? <span className="text-red-600"> ({majors}!)</span> : ""}</dd></div>
+                <div className="rounded-sm bg-carbon-850 p-2"><dt className="text-zinc-500">Reliability</dt><dd className="text-base font-bold">{s.sub.reliability.toFixed(1)}</dd></div>
+                <div className="rounded-sm bg-carbon-850 p-2"><dt className="text-zinc-500">Value</dt><dd className="text-base font-bold">{s.sub.value.toFixed(1)}</dd></div>
+                <div className={`rounded-sm p-2 ${majors ? "bg-red-500/10" : "bg-carbon-850"}`}><dt className="text-zinc-500">Known issues</dt><dd className="text-base font-bold">{issueCount}{majors ? <span className="text-red-400"> ({majors}!)</span> : ""}</dd></div>
               </dl>
               <div className="mt-auto flex justify-between pt-3 text-sm">
-                <span className="text-slate-500">New from <b className="text-slate-800">{usd(m.msrp)}</b></span>
-                {market.usedCount > 0 && <span className="text-slate-500">Used avg <b className="text-slate-800">{usd(market.avg)}</b></span>}
+                <span className="text-zinc-500">New from <b className="text-zinc-100">{usd(m.msrp)}</b></span>
+                {market.usedCount > 0 && <span className="text-zinc-500">Used avg <b className="text-zinc-100">{usd(market.avg)}</b></span>}
               </div>
             </div>
           </Link>

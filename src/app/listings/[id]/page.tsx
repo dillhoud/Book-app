@@ -34,7 +34,7 @@ export default async function ListingPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
-      <nav className="mb-4 text-sm text-slate-500">
+      <nav className="mb-4 text-sm text-zinc-500">
         <Link href="/listings" className="hover:underline">Buy</Link> /{" "}
         <Link href={`/listings?category=${m.category}`} className="hover:underline">{m.category.toUpperCase()}</Link> /{" "}
         <Link href={`/listings?model=${m.slug}`} className="hover:underline">{m.make} {m.model}</Link>
@@ -61,7 +61,7 @@ export default async function ListingPage({ params }: Props) {
                 ["Segment", m.segment],
               ].map(([k, v]) => (
                 <div key={k as string}>
-                  <dt className="text-slate-500">{k}</dt>
+                  <dt className="text-zinc-500">{k}</dt>
                   <dd className="font-semibold">{v}</dd>
                 </div>
               ))}
@@ -77,9 +77,9 @@ export default async function ListingPage({ params }: Props) {
           <div className="card p-6">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="text-lg font-bold">Known issues for the {m.make} {m.model}</h2>
-              <Link href={`/research/${m.slug}#issues`} className="text-sm font-semibold text-brand-600 hover:underline">Full model report →</Link>
+              <Link href={`/research/${m.slug}#issues`} className="text-sm font-semibold text-brand-400 hover:underline">Full model report →</Link>
             </div>
-            <p className="mt-1 text-sm text-slate-500">What owners report most — ask the seller about these before you buy.</p>
+            <p className="mt-1 text-sm text-zinc-500">What owners report most — ask the seller about these before you buy.</p>
             <div className="mt-4 space-y-3">
               {issues.map((i) => <IssueCard key={i.id} issue={i} highlightYear={l.year} />)}
             </div>
@@ -90,11 +90,11 @@ export default async function ListingPage({ params }: Props) {
         <aside className="space-y-4 lg:sticky lg:top-20 lg:h-fit">
           <div className="card p-6">
             <h1 className="text-xl font-extrabold leading-tight">{l.year} {m.make} {m.model}</h1>
-            <p className="text-sm text-slate-500">{l.city.name}, {l.city.state} · listed {l.daysOnMarket} days ago</p>
+            <p className="text-sm text-zinc-500">{l.city.name}, {l.city.state} · listed {l.daysOnMarket} days ago</p>
             <div className="mt-4 text-3xl font-extrabold">{usd(l.price)}</div>
-            {l.priceDrop > 0 && <div className="text-sm font-semibold text-emerald-700">Dropped {usd(l.priceDrop)}</div>}
+            {l.priceDrop > 0 && <div className="text-sm font-semibold text-emerald-400">Dropped {usd(l.priceDrop)}</div>}
             <div className="mt-4"><DealBadge deal={l.deal} size="lg" /></div>
-            <p className="mt-3 text-sm text-slate-600">
+            <p className="mt-3 text-sm text-zinc-400">
               {pct === 0 ? (
                 <>This price is <b>right at</b> our estimated market value of </>
               ) : (
@@ -107,9 +107,9 @@ export default async function ListingPage({ params }: Props) {
               <button className="btn-primary">Contact {l.sellerType === "dealer" ? "dealer" : "seller"}</button>
               <button className="btn-ghost">Check availability</button>
             </div>
-            <div className="mt-4 border-t border-slate-100 pt-4 text-sm">
+            <div className="mt-4 border-t border-carbon-800 pt-4 text-sm">
               <div className="font-semibold">{l.seller}</div>
-              <div className="text-slate-500">{l.sellerType === "dealer" ? "Dealer" : "Private party"} · {l.city.name}, {l.city.state}</div>
+              <div className="text-zinc-500">{l.sellerType === "dealer" ? "Dealer" : "Private party"} · {l.city.name}, {l.city.state}</div>
             </div>
           </div>
 
@@ -118,7 +118,7 @@ export default async function ListingPage({ params }: Props) {
               <div className="font-bold">Price history</div>
               <ul className="mt-2 space-y-1">
                 {l.history.map((h) => (
-                  <li key={h.daysAgo} className="flex justify-between"><span className="text-slate-500">{h.daysAgo} days ago</span><span className="font-semibold">{usd(h.price)}</span></li>
+                  <li key={h.daysAgo} className="flex justify-between"><span className="text-zinc-500">{h.daysAgo} days ago</span><span className="font-semibold">{usd(h.price)}</span></li>
                 ))}
               </ul>
             </div>
@@ -129,7 +129,7 @@ export default async function ListingPage({ params }: Props) {
             <div className="mt-1 flex items-center gap-2">
               <Stars value={score.avg} />
               <span className="font-bold">{score.avg.toFixed(1)}</span>
-              <span className="text-sm text-slate-500">{score.count} reviews · {score.recommendPct}% recommend</span>
+              <span className="text-sm text-zinc-500">{score.count} reviews · {score.recommendPct}% recommend</span>
             </div>
           </Link>
 
@@ -139,12 +139,12 @@ export default async function ListingPage({ params }: Props) {
               <ul className="mt-2 space-y-2 text-sm">
                 {promos.map((p) => (
                   <li key={p.id} className="flex justify-between gap-3">
-                    <span><span className="font-medium">{p.title}</span> <span className="text-slate-500">· {promoTypeLabel(p.type)}</span></span>
-                    <span className="whitespace-nowrap font-semibold text-emerald-700">{p.amount}</span>
+                    <span><span className="font-medium">{p.title}</span> <span className="text-zinc-500">· {promoTypeLabel(p.type)}</span></span>
+                    <span className="whitespace-nowrap font-semibold text-emerald-400">{p.amount}</span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-2 text-xs text-slate-500">Factory offers usually apply to new units. Confirm with the dealer.</p>
+              <p className="mt-2 text-xs text-zinc-500">Factory offers usually apply to new units. Confirm with the dealer.</p>
             </div>
           )}
         </aside>
@@ -152,7 +152,7 @@ export default async function ListingPage({ params }: Props) {
 
       {similar.length > 0 && (
         <section className="mt-12">
-          <h2 className="mb-4 text-2xl font-extrabold tracking-tight">Similar {m.make} {m.model} listings</h2>
+          <h2 className="mb-4 font-display text-3xl font-bold uppercase italic tracking-tight text-white">Similar {m.make} {m.model} listings</h2>
           <div className="space-y-3">{similar.map((s) => <ListingCard key={s.id} l={s} />)}</div>
         </section>
       )}

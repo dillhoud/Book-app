@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <div className="mx-auto max-w-xl px-4 py-24 text-center">
       <h1 className="text-3xl font-extrabold">Off the trail</h1>
-      <p className="mt-2 text-slate-500">We couldn&apos;t find that page.</p>
+      <p className="mt-2 text-zinc-500">We couldn&apos;t find that page.</p>
       <Link href="/" className="btn-primary mt-6">Back home</Link>
     </div>
   );

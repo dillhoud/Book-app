@@ -21,30 +21,31 @@
 }
 
 body {
-  background: #f6f7f9;
-  color: var(--color-ink);
+  background: var(--color-carbon-950);
+  color: #f4f4f5;
+  color-scheme: dark;
 }
 
 @utility card {
-  @apply rounded-xl border border-slate-200 bg-white shadow-sm;
+  @apply rounded-sm border border-carbon-800 bg-carbon-900;
 }
 @utility btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition;
+  @apply inline-flex items-center justify-center gap-2 rounded-sm px-4 py-2 text-xs font-bold uppercase tracking-wider transition;
 }
 @utility btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition bg-brand-500 text-white hover:bg-brand-600;
+  @apply inline-flex items-center justify-center gap-2 rounded-sm bg-brand-500 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-brand-600;
 }
 @utility btn-ghost {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition border border-slate-300 bg-white text-slate-700 hover:bg-slate-50;
+  @apply inline-flex items-center justify-center gap-2 rounded-sm border border-carbon-600 bg-transparent px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-zinc-200 transition hover:border-zinc-300 hover:text-white;
 }
 @utility field {
-  @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100;
+  @apply w-full rounded-sm border border-carbon-700 bg-carbon-950 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/25;
 }
 @utility label {
-  @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500;
+  @apply mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500;
 }
 @utility chip {
-  @apply inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-xs font-medium text-slate-600;
+  @apply inline-flex items-center rounded-sm border border-carbon-700 bg-carbon-850 px-2 py-0.5 text-xs font-medium text-zinc-400;
 }
 
 @utility display {

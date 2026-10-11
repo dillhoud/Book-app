@@ -11,28 +11,28 @@ export function ListingCard({ l, distance }: { l: Listing; distance?: number }) 
       <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
-            <h3 className="font-bold leading-tight group-hover:text-brand-600">
+            <h3 className="font-bold leading-tight group-hover:text-brand-400">
               {l.year} {l.model.make} {l.model.model}
             </h3>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-zinc-500">
               {l.condition === "new" ? "New" : `${num(l.usage)} ${l.usageUnit}`} · {l.color} · {l.city.name}, {l.city.state}
               {distance !== undefined && ` (${distance} mi)`}
             </p>
           </div>
           <div className="text-right">
             <div className="text-xl font-extrabold">{usd(l.price)}</div>
-            {l.priceDrop > 0 && <div className="text-xs font-semibold text-emerald-700">↓ {usd(l.priceDrop)} price drop</div>}
+            {l.priceDrop > 0 && <div className="text-xs font-semibold text-emerald-400">↓ {usd(l.priceDrop)} price drop</div>}
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <DealBadge deal={l.deal} />
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-zinc-500">
             {l.savings >= 0 ? `${usd(l.savings)} below` : `${usd(-l.savings)} above`} est. market {usd(l.marketValue)}
           </span>
         </div>
         <div className="mt-auto flex flex-wrap gap-1.5 pt-1">
           {l.oneOwner && <span className="chip">1 owner</span>}
-          {l.titleStatus === "Rebuilt" && <span className="chip border-red-200 bg-red-50 text-red-700">Rebuilt title</span>}
+          {l.titleStatus === "Rebuilt" && <span className="chip border-red-500/30 bg-red-500/10 text-red-400">Rebuilt title</span>}
           {l.features.slice(0, 3).map((f) => (
             <span key={f} className="chip">{f}</span>
           ))}

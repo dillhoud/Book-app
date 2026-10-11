@@ -15,7 +15,7 @@ export function ReviewFilterPanel({ sp, clearHref, fixedModel }: { sp: SP; clear
     <aside className="card space-y-5 p-5">
       <div className="flex items-center justify-between">
         <span className="font-bold">Filter reviews</span>
-        <Link href={clearHref} scroll={false} className="text-xs font-semibold text-brand-600 hover:underline">Clear</Link>
+        <Link href={clearHref} scroll={false} className="text-xs font-semibold text-brand-400 hover:underline">Clear</Link>
       </div>
       <div>
         <label className="label" htmlFor="rq">Search in reviews</label>
@@ -57,7 +57,7 @@ export function ReviewFilterPanel({ sp, clearHref, fixedModel }: { sp: SP; clear
           {["", "2", "3", "4", "5"].map((v) => (
             <label key={v} className="cursor-pointer">
               <input type="radio" name="minRating" value={v} defaultChecked={(first(sp.minRating) ?? "") === v} className="peer sr-only" />
-              <span className="block rounded-md border border-slate-200 py-1.5 text-center text-xs font-semibold text-slate-600 peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700">
+              <span className="block rounded-sm border border-carbon-800 py-1.5 text-center text-xs font-semibold text-zinc-400 peer-checked:border-brand-500 peer-checked:bg-brand-500/10 peer-checked:text-white">
                 {v ? `${v}★+` : "Any"}
               </span>
             </label>
@@ -108,7 +108,7 @@ export function ReviewFilterPanel({ sp, clearHref, fixedModel }: { sp: SP; clear
 export function ReviewSort({ sp }: { sp: SP }) {
   return (
     <label className="flex items-center gap-2 text-sm">
-      <span className="text-slate-500">Sort</span>
+      <span className="text-zinc-500">Sort</span>
       <select name="sort" defaultValue={first(sp.sort) ?? "helpful"} className="field w-auto">
         <option value="helpful">Most helpful</option>
         <option value="newest">Newest</option>

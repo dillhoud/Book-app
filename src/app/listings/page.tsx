@@ -47,11 +47,11 @@ export default async function ListingsPage({ searchParams }: { searchParams: Pro
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
-      <h1 className="text-3xl font-extrabold tracking-tight">
+      <h1 className="font-display text-4xl font-bold uppercase italic tracking-tight text-white">
         {category ? `${categoryLabel(category)}s` : "Powersports"} for sale
-        {makes.length === 1 && <span className="text-slate-500"> · {makes[0]}</span>}
+        {makes.length === 1 && <span className="text-zinc-500"> · {makes[0]}</span>}
       </h1>
-      <p className="mt-1 text-slate-500">{rows.length} matches · every listing rated against estimated market value</p>
+      <p className="mt-1 text-zinc-500">{rows.length} matches · every listing rated against estimated market value</p>
 
       <AutoSubmitForm className="mt-6 grid gap-6 lg:grid-cols-[280px_1fr]">
         {/* Filters */}
@@ -59,7 +59,7 @@ export default async function ListingsPage({ searchParams }: { searchParams: Pro
         <aside className="card space-y-5 p-5">
           <div className="flex items-center justify-between">
             <span className="font-bold">Filters</span>
-            <Link href="/listings" className="text-xs font-semibold text-brand-600 hover:underline">Clear all</Link>
+            <Link href="/listings" className="text-xs font-semibold text-brand-400 hover:underline">Clear all</Link>
           </div>
           <div>
             <label className="label" htmlFor="q">Keyword</label>
@@ -81,7 +81,7 @@ export default async function ListingsPage({ searchParams }: { searchParams: Pro
                     <input type="checkbox" name="deal" value={d.id} defaultChecked={deals.includes(d.id)} className="accent-brand-500" />
                     <DealBadge deal={d.id} />
                   </span>
-                  <span className="text-xs text-slate-400">{dealCounts[d.id]}</span>
+                  <span className="text-xs text-zinc-500">{dealCounts[d.id]}</span>
                 </label>
               ))}
             </div>
@@ -168,7 +168,7 @@ export default async function ListingsPage({ searchParams }: { searchParams: Pro
               {deals.map((d) => <DealBadge key={d} deal={d as never} />)}
             </div>
             <label className="flex items-center gap-2 text-sm">
-              <span className="text-slate-500">Sort</span>
+              <span className="text-zinc-500">Sort</span>
               <select name="sort" defaultValue={first(sp.sort) ?? "best"} className="field w-auto">
                 <option value="best">Best deals first</option>
                 <option value="price-asc">Lowest price</option>
@@ -181,7 +181,7 @@ export default async function ListingsPage({ searchParams }: { searchParams: Pro
             </label>
           </div>
           {shown.length === 0 ? (
-            <div className="card p-10 text-center text-slate-500">
+            <div className="card p-10 text-center text-zinc-500">
               No matches. Try widening the radius or removing a filter.
             </div>
           ) : (
@@ -192,7 +192,7 @@ export default async function ListingsPage({ searchParams }: { searchParams: Pro
           {pages > 1 && (
             <nav className="mt-6 flex items-center justify-center gap-2 text-sm">
               {page > 1 && <Link className="btn-ghost" href={`/listings${withParams(sp, { page: String(page - 1) })}`}>← Prev</Link>}
-              <span className="text-slate-500">Page {page} of {pages}</span>
+              <span className="text-zinc-500">Page {page} of {pages}</span>
               {page < pages && <Link className="btn-ghost" href={`/listings${withParams(sp, { page: String(page + 1) })}`}>Next →</Link>}
             </nav>
           )}
@@ -206,7 +206,7 @@ function Radio({ name, value, label, checked }: { name: string; value: string; l
   return (
     <label className="cursor-pointer">
       <input type="radio" name={name} value={value} defaultChecked={checked} className="peer sr-only" />
-      <span className="block rounded-md border border-slate-200 px-2 py-1.5 text-center text-xs font-medium text-slate-600 peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-100">
+      <span className="block rounded-sm border border-carbon-800 px-2 py-1.5 text-center text-xs font-medium text-zinc-400 peer-checked:border-brand-500 peer-checked:bg-brand-500/10 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-100">
         {label}
       </span>
     </label>

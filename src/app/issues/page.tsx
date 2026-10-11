@@ -41,8 +41,8 @@ export default async function IssuesPage({ searchParams }: { searchParams: Promi
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
-      <h1 className="text-3xl font-extrabold tracking-tight">Common problems by make &amp; model</h1>
-      <p className="mt-1 max-w-3xl text-slate-500">
+      <h1 className="font-display text-4xl font-bold uppercase italic tracking-tight text-white">Common problems by make &amp; model</h1>
+      <p className="mt-1 max-w-3xl text-zinc-500">
         The issues riders keep talking about on Reddit and model-specific forums, plus recalls and service bulletins —
         with symptoms, the usual fix and what it costs. Know what to check before you buy.
       </p>
@@ -98,9 +98,9 @@ export default async function IssuesPage({ searchParams }: { searchParams: Promi
           </select>
         </div>
         <div className="flex items-end justify-between gap-2 sm:col-span-2 lg:col-span-4">
-          <span className="text-sm text-slate-500">{rows.length} issues</span>
+          <span className="text-sm text-zinc-500">{rows.length} issues</span>
           <label className="flex items-center gap-2 text-sm">
-            <span className="text-slate-500">Sort</span>
+            <span className="text-zinc-500">Sort</span>
             <select name="sort" defaultValue={sort} className="field w-auto">
               <option value="severity">Most severe first</option>
               <option value="mentions">Most discussed</option>
@@ -113,13 +113,13 @@ export default async function IssuesPage({ searchParams }: { searchParams: Promi
         {rows.map(({ i, m }) => (
           <div key={i.id} className="flex flex-col">
             <IssueCard issue={i} showModel={`${m.make} ${m.model}`} highlightYear={year || undefined} />
-            <Link href={`/research/${m.slug}`} className="mt-1 self-end text-xs font-semibold text-brand-600 hover:underline">
+            <Link href={`/research/${m.slug}`} className="mt-1 self-end text-xs font-semibold text-brand-400 hover:underline">
               {m.make} {m.model} full report →
             </Link>
           </div>
         ))}
       </div>
-      {rows.length === 0 && <div className="card mt-6 p-10 text-center text-slate-500">No issues match — that&apos;s a good sign.</div>}
+      {rows.length === 0 && <div className="card mt-6 p-10 text-center text-zinc-500">No issues match — that&apos;s a good sign.</div>}
     </div>
   );
 }

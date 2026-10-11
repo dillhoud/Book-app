@@ -9,14 +9,14 @@ export const metadata: Metadata = { title: "Current deals, rebates & pro discoun
 type SP = Record<string, string | string[] | undefined>;
 
 const TYPE_STYLE: Record<string, string> = {
-  rebate: "bg-emerald-100 text-emerald-800",
-  financing: "bg-sky-100 text-sky-800",
-  pro: "bg-violet-100 text-violet-800",
-  military: "bg-lime-100 text-lime-800",
-  "first-responder": "bg-red-100 text-red-800",
-  ag: "bg-amber-100 text-amber-800",
-  loyalty: "bg-slate-200 text-slate-800",
-  racer: "bg-orange-100 text-orange-800",
+  rebate: "bg-emerald-500/15 text-emerald-300",
+  financing: "bg-sky-500/15 text-sky-300",
+  pro: "bg-violet-500/15 text-violet-300",
+  military: "bg-lime-500/15 text-lime-300",
+  "first-responder": "bg-red-500/15 text-red-300",
+  ag: "bg-amber-500/15 text-amber-300",
+  loyalty: "bg-carbon-700 text-zinc-100",
+  racer: "bg-orange-500/15 text-orange-300",
 };
 
 export default async function DealsPage({ searchParams }: { searchParams: Promise<SP> }) {
@@ -33,8 +33,8 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
-      <h1 className="text-3xl font-extrabold tracking-tight">Deals, rebates &amp; pro discounts</h1>
-      <p className="mt-1 max-w-3xl text-slate-500">
+      <h1 className="font-display text-4xl font-bold uppercase italic tracking-tight text-white">Deals, rebates &amp; pro discounts</h1>
+      <p className="mt-1 max-w-3xl text-zinc-500">
         Every manufacturer offer in one place — cash rebates, promo financing, and the programs most buyers miss:
         pro/industry, military, first responder, farm &amp; ag, loyalty and racer contingency. Many stack with a dealer discount.
       </p>
@@ -46,7 +46,7 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
             {PROMO_TYPES.map((t) => (
               <label key={t.id} className="cursor-pointer" title={t.description}>
                 <input type="checkbox" name="type" value={t.id} defaultChecked={types.includes(t.id)} className="peer sr-only" />
-                <span className="block rounded-full border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-600 peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-100">
+                <span className="block rounded-full border border-carbon-800 px-3 py-1.5 text-sm font-medium text-zinc-400 peer-checked:border-brand-500 peer-checked:bg-brand-500/10 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-100">
                   {t.label}
                 </span>
               </label>
@@ -78,7 +78,7 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
         </div>
       </AutoSubmitForm>
 
-      <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+      <div className="mt-3 rounded-sm border border-amber-500/30 bg-amber-500/10 p-3 text-sm text-amber-200">
         Offers change monthly and vary by region and dealer. Use <b>Verify</b> to confirm on the brand&apos;s site before you go in — and ask the dealer which programs stack.
       </div>
 
@@ -89,29 +89,29 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
             <div key={p.id} className="card flex flex-col p-5">
               <div className="flex items-center justify-between gap-2">
                 <span className="text-sm font-bold">{p.make}</span>
-                <span className={`rounded-md px-2 py-0.5 text-xs font-bold ${TYPE_STYLE[p.type]}`}>{promoTypeLabel(p.type)}</span>
+                <span className={`rounded-sm px-2 py-0.5 text-xs font-bold ${TYPE_STYLE[p.type]}`}>{promoTypeLabel(p.type)}</span>
               </div>
               <h2 className="mt-2 font-bold">{p.title}</h2>
-              <div className="mt-1 text-2xl font-extrabold text-emerald-700">{p.amount}</div>
-              {p.models && <div className="mt-1 text-sm text-slate-600">{p.models}</div>}
-              <p className="mt-2 text-sm text-slate-600"><b className="text-slate-800">Who qualifies:</b> {p.eligibility}</p>
+              <div className="mt-1 text-2xl font-extrabold text-emerald-400">{p.amount}</div>
+              {p.models && <div className="mt-1 text-sm text-zinc-400">{p.models}</div>}
+              <p className="mt-2 text-sm text-zinc-400"><b className="text-zinc-100">Who qualifies:</b> {p.eligibility}</p>
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {p.categories.map((c) => <span key={c} className="chip">{CATEGORIES.find((x) => x.id === c)?.plural}</span>)}
               </div>
               <div className="mt-auto flex items-center justify-between pt-4 text-sm">
-                <span className={left <= 14 ? "font-semibold text-red-600" : "text-slate-500"}>
+                <span className={left <= 14 ? "font-semibold text-red-400" : "text-zinc-500"}>
                   Ends {shortDate(p.ends)}{left <= 14 ? ` · ${left}d left` : ""}
                 </span>
                 <span className="flex gap-3">
-                  <Link href={`/listings?make=${encodeURIComponent(p.make)}${p.categories.length === 1 ? `&category=${p.categories[0]}` : ""}&condition=new`} className="font-semibold text-slate-700 hover:underline">Shop</Link>
-                  <a href={p.verifyUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-600 hover:underline">Verify ↗</a>
+                  <Link href={`/listings?make=${encodeURIComponent(p.make)}${p.categories.length === 1 ? `&category=${p.categories[0]}` : ""}&condition=new`} className="font-semibold text-zinc-200 hover:underline">Shop</Link>
+                  <a href={p.verifyUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-400 hover:underline">Verify ↗</a>
                 </span>
               </div>
             </div>
           );
         })}
       </div>
-      {rows.length === 0 && <div className="card mt-6 p-10 text-center text-slate-500">No active offers match those filters.</div>}
+      {rows.length === 0 && <div className="card mt-6 p-10 text-center text-zinc-500">No active offers match those filters.</div>}
     </div>
   );
 }
