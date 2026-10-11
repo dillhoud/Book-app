@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CATALOG, CATEGORIES, MAKES, getModel } from "@/data/catalog";
-import { ISSUES } from "@/data/issues";
+import { getIssues } from "@/lib/content";
 import { first } from "@/lib/format";
 import { AutoSubmitForm } from "@/components/AutoSubmitForm";
 import { IssueCard } from "@/components/IssueCard";
@@ -21,6 +21,7 @@ export default async function IssuesPage({ searchParams }: { searchParams: Promi
   const sort = first(sp.sort) ?? "severity";
 
   const sevOrder = { major: 0, moderate: 1, minor: 2 };
+  const ISSUES = await getIssues();
   const rows = ISSUES.map((i) => ({ i, m: getModel(i.modelSlug)! }))
     .filter(({ i, m }) => {
       if (cat && m.category !== cat) return false;

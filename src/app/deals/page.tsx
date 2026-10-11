@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CATEGORIES } from "@/data/catalog";
-import { PROMOS, PROMO_TYPES, promoTypeLabel } from "@/data/promos";
+import { PROMO_TYPES, promoTypeLabel } from "@/data/promos";
+import { getPromos } from "@/lib/content";
 import { all, daysUntil, first, shortDate } from "@/lib/format";
 import { AutoSubmitForm } from "@/components/AutoSubmitForm";
 
@@ -25,6 +26,7 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
   const make = first(sp.make);
   const cat = first(sp.category);
   const sort = first(sp.sort) ?? "value";
+  const PROMOS = await getPromos();
   const makes = Array.from(new Set(PROMOS.map((p) => p.make))).sort();
 
   const rows = PROMOS.filter(
@@ -101,6 +103,7 @@ export default async function DealsPage({ searchParams }: { searchParams: Promis
               <div className="mt-auto flex items-center justify-between pt-4 text-sm">
                 <span className={left <= 14 ? "font-semibold text-red-400" : "text-zinc-500"}>
                   Ends {shortDate(p.ends)}{left <= 14 ? ` · ${left}d left` : ""}
+                  {p.lastVerified && <span className="block text-xs text-zinc-600">Checked {shortDate(p.lastVerified)}</span>}
                 </span>
                 <span className="flex gap-3">
                   <Link href={`/listings?make=${encodeURIComponent(p.make)}${p.categories.length === 1 ? `&category=${p.categories[0]}` : ""}&condition=new`} className="font-semibold text-zinc-200 hover:underline">Shop</Link>

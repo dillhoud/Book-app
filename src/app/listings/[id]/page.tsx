@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { issuesFor } from "@/data/issues";
-import { promosForMake, promoTypeLabel } from "@/data/promos";
+import { promoTypeLabel } from "@/data/promos";
+import { getIssues, getPromos } from "@/lib/content";
 import { allListings, getListing } from "@/lib/listings";
 import { scoreFor } from "@/lib/reviews";
 import { num, usd } from "@/lib/format";
@@ -23,9 +23,9 @@ export default async function ListingPage({ params }: Props) {
   const l = getListing((await params).id);
   if (!l) notFound();
   const m = l.model;
-  const issues = issuesFor(m.slug);
+  const issues = await getIssues(m.slug);
   const score = scoreFor(m.slug);
-  const promos = promosForMake(m.make).filter((p) => p.categories.includes(m.category));
+  const promos = (await getPromos(m.make)).filter((p) => p.categories.includes(m.category));
   const similar = allListings()
     .filter((x) => x.modelSlug === m.slug && x.id !== l.id)
     .sort((a, b) => Math.abs(a.year - l.year) - Math.abs(b.year - l.year))

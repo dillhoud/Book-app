@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  // Neon/Vercel give a pooled URL for the app and a direct one for migrations.
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+enum Severity {
+  minor
+  moderate
+  major
+}
+
+enum IssueKind {
+  owner_reported
+  service_bulletin
+  recall
+}
+
+enum PromoType {
+  rebate
+  financing
+  pro
+  military
+  first_responder
+  ag
+  loyalty
+  racer
+}
+
+/// A known problem for a model, shown on /issues, model pages and listings.
+model Issue {
+  id           String    @id @default(cuid())
+  modelSlug    String
+  title        String
+  severity     Severity
+  kind         IssueKind @default(owner_reported)
+  years        String    @default("All")
+  symptoms     String
+  fix          String
+  estCost      String    @default("")
+  mentions     Int       @default(0)
+  /// Community names, e.g. "r/RZR", "RZRForums"
+  sources      String[]
+  /// Links to the actual threads / recall notices
+  sourceUrls   String[]
+  published    Boolean   @default(false)
+  lastVerified DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([modelSlug])
+}
+
+/// A manufacturer offer shown on /deals.
+model Promo {
+  id           String    @id @default(cuid())
+  make         String
+  type         PromoType
+  title        String
+  amount       String
+  /// Rough dollar value, used for sorting
+  value        Int       @default(0)
+  /// "atv" | "sxs" | "snowmobile" | "motorcycle"
+  categories   String[]
+  models       String?
+  eligibility  String
+  ends         DateTime
+  verifyUrl    String
+  published    Boolean   @default(false)
+  lastVerified DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}

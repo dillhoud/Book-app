@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CATALOG, CATEGORIES, MAKES, USE_CASES } from "@/data/catalog";
-import { issuesFor } from "@/data/issues";
+import { getIssues } from "@/lib/content";
 import { marketStats } from "@/lib/listings";
 import { scoreFor } from "@/lib/reviews";
 import { first, usd } from "@/lib/format";
@@ -20,10 +20,11 @@ export default async function ResearchPage({ searchParams }: { searchParams: Pro
   const maxMsrp = Number(first(sp.maxMsrp) ?? 0);
   const sort = first(sp.sort) ?? "rating";
 
+  const allIssues = await getIssues();
   const rows = CATALOG.filter(
     (m) => (!cat || m.category === cat) && (!make || m.make === make) && (!use || m.useCases.includes(use as never)) && (!maxMsrp || m.msrp <= maxMsrp),
   ).map((m) => {
-    const issues = issuesFor(m.slug);
+    const issues = allIssues.filter((i) => i.modelSlug === m.slug);
     return {
       m,
       s: scoreFor(m.slug),

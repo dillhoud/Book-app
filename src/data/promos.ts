@@ -34,6 +34,8 @@ export interface Promo {
   eligibility: string;
   ends: string; // ISO date
   verifyUrl: string;
+  /** ISO date this offer was last checked on the brand's site. */
+  lastVerified?: string;
 }
 
 const BRAND_SITES: Record<string, string> = {

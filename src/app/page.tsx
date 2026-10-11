@@ -1,15 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CATALOG, CATEGORIES, MAKES, getModel, type Category } from "@/data/catalog";
-import { ISSUES } from "@/data/issues";
-import { PROMOS, promoTypeLabel } from "@/data/promos";
+import { promoTypeLabel } from "@/data/promos";
+import { getIssues, getPromos } from "@/lib/content";
 import { allListings, CITIES, DEAL_RATINGS, type Listing } from "@/lib/listings";
 import { scoreFor } from "@/lib/reviews";
 import { daysUntil, num, shortDate, usd } from "@/lib/format";
 
 const SHORT: Record<Category, string> = { atv: "ATV", sxs: "SXS", snowmobile: "Snow", motorcycle: "Moto" };
 
-export default function Home() {
+// Re-checked every few minutes; admin edits refresh it immediately.
+export const revalidate = 300;
+
+export default async function Home() {
+  const [ISSUES, PROMOS] = await Promise.all([getIssues(), getPromos()]);
   const listings = allListings();
   const cleanUsed = listings.filter((l) => l.condition === "used" && l.titleStatus === "Clean");
   const bySavingsPct = [...cleanUsed].sort((a, b) => b.savings / b.marketValue - a.savings / a.marketValue);

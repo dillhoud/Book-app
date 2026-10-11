@@ -1,4 +1,4 @@
-# TrailGurus
+# Roost
 
 A CarGurus-style marketplace for powersports — ATVs, side-by-sides, snowmobiles and motorcycles — that also covers research: owner reviews you can filter, common problems by make and model, and every current brand discount.
 
@@ -24,7 +24,34 @@ npm install
 npm run dev     # http://localhost:3000
 ```
 
-Stack: Next.js 16 (App Router, server components), React 19, Tailwind CSS 4, TypeScript. No database yet.
+Stack: Next.js 16 (App Router, server components), React 19, Tailwind CSS 4, TypeScript, Prisma + Postgres.
+
+## Admin (`/admin`)
+
+A password-protected area for managing **known issues** and **deals** without touching code:
+
+- Add, edit, delete, publish or unpublish issues and offers
+- Source links on issues (shown publicly so riders can read the original threads)
+- "Mark checked" with a last-checked date, plus an overview of what's ending soon or hasn't been checked in 30 days
+- Changes show on the public site immediately
+
+### Setting it up on Vercel
+
+1. **Password:** Project → Settings → Environment Variables → add `ADMIN_PASSWORD`.
+2. **Database:** Project → Storage → Create Database → **Neon (Postgres)** → free plan → connect to this project. This adds `DATABASE_URL` and `DATABASE_URL_UNPOOLED`.
+3. **Redeploy.** The build creates the tables automatically.
+4. Visit `/admin`, log in, and click **Load starter content** to copy the current sample issues and deals into the database.
+
+Until a database is connected, the public site runs on the bundled sample data and the admin shows these steps.
+
+### Local development
+
+```bash
+cp .env.example .env      # point DATABASE_URL at a local Postgres
+npx prisma migrate dev    # create tables
+npm run db:seed           # optional: load starter content
+npm run dev
+```
 
 ## Data — important
 

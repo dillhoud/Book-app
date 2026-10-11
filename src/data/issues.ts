@@ -14,6 +14,10 @@ export interface CommonIssue {
   /** Approximate count of owner threads/posts discussing it in the sources. */
   mentions: number;
   sources: string[];
+  /** Links to the threads / recall notices behind this summary. */
+  sourceUrls?: string[];
+  /** ISO date this issue was last checked. */
+  lastVerified?: string;
 }
 
 type Raw = Omit<CommonIssue, "id">;

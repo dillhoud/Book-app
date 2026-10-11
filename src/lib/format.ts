@@ -32,3 +32,8 @@ export function withParams(params: Params, patch: Record<string, string | undefi
   const s = sp.toString();
   return s ? `?${s}` : "";
 }
+
+/** The moment `n` days before now. */
+export function daysAgo(n: number) {
+  return new Date(Date.now() - n * 86_400_000);
+}

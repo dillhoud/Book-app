@@ -1,5 +1,17 @@
 import clsx from "clsx";
 import type { CommonIssue } from "@/data/issues";
+import { shortDate } from "@/lib/format";
+
+function hostLabel(url: string, n: number) {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "");
+    const sub = host === "reddit.com" ? u.pathname.match(/\/r\/([^/]+)/)?.[1] : undefined;
+    return sub ? `r/${sub}` : host;
+  } catch {
+    return `Source ${n + 1}`;
+  }
+}
 
 const SEV: Record<CommonIssue["severity"], string> = {
   major: "bg-red-500/15 text-red-300 border-red-500/30",
@@ -39,7 +51,17 @@ export function IssueCard({ issue, highlightYear, showModel }: { issue: CommonIs
         <span>Typical cost: <b className="text-zinc-200">{issue.estCost}</b></span>
         <span>~{issue.mentions} owner discussions</span>
         <span>Sources: {issue.sources.join(", ")}</span>
+        {issue.lastVerified && <span>Checked {shortDate(issue.lastVerified)}</span>}
       </div>
+      {issue.sourceUrls && issue.sourceUrls.length > 0 && (
+        <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+          {issue.sourceUrls.map((u, n) => (
+            <a key={u} href={u} target="_blank" rel="noopener noreferrer nofollow" className="font-semibold text-brand-400 hover:underline">
+              {hostLabel(u, n)} ↗
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
